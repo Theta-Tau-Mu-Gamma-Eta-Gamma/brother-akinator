@@ -9,6 +9,14 @@ version = "0.1.0"
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
+[tool.hatch.build.targets.wheel]
+# include everything under src (all files and subdirs)
+only-include = ["src/*"]
+
+# map the src directory into the package root so src/foo -> import foo
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
@@ -17,6 +25,7 @@ platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
 brother_akinator = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+start = "python src/main.py"
 
 [tool.pixi.dependencies]
 scikit-learn = ">=1.7.2,<2"

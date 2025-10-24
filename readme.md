@@ -23,3 +23,7 @@ You should be good!
 ## Contribution Guide
 
 Make sure you read the Standards found in the shared drive, then assign yourself to a task and start working.
+
+## Running the game
+For now to launch the game run this in the main dir.
+<pre>pixi run start</pre>
