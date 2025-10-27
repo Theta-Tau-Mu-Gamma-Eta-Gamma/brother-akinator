@@ -8,6 +8,7 @@ from arcade.gui import (
     UIView,
     UIFlatButton
 )
+import random
 
 
 class MenuView(arcade.View):
@@ -27,7 +28,7 @@ class MenuView(arcade.View):
         self.buttons.center_y = WINDOW_HEIGHT /4 + 40
 
         self.akinator = arcade.Sprite(constants.akinator_1)
-        self.akinator.scale = 1
+        self.akinator.scale = random.gauss(2, 1)
         self.akinator.center_x = WINDOW_WIDTH /4 
         self.akinator.center_y = WINDOW_HEIGHT /2
 
