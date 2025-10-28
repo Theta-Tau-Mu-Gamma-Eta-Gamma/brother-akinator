@@ -13,5 +13,5 @@ transparent_style = {
             'disabled' : UIFlatButton.UIStyle(bg=[0,0,0,0])
             }
 
-main_men_buttons = arcade.load_texture(pathlib.Path(r"src\sprites\buttons.png"))
-akinator_1 = arcade.load_texture(pathlib.Path(r"src\sprites\akinator_1.jpg"))
+main_men_buttons = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"buttons.png")
+akinator_1 = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"akinator_1.jpg")
