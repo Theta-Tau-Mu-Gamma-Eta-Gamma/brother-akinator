@@ -29,3 +29,5 @@ start = "python src/main.py"
 
 [tool.pixi.dependencies]
 scikit-learn = ">=1.7.2,<2"
+pathlib = ">=1.0.1,<2"
+pymunk = "==6.9.0"
