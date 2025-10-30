@@ -15,3 +15,5 @@ transparent_style = {
 
 main_men_buttons = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"buttons.png")
 akinator_1 = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"akinator_1.jpg")
+pauseButtons = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"PauseButtons.png")
+shaqanator = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"shaqanator.png")
