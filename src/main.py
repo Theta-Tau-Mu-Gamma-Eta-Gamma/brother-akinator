@@ -2,14 +2,14 @@ import arcade
 
 from util.constants import WINDOW_HEIGHT, WINDOW_TITLE, WINDOW_WIDTH
 from window import BrotherWindow 
-from views.pause_menu import PauseView
+from views.guess_menu import GuessView
 def main():
     """ Main function """
     # Create a window class. This is what actually shows up on screen
     window = BrotherWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 
     # Create and setup the GameView
-    game = PauseView()
+    game = GuessView()
 
     # Show GameView on screen
     window.show_view(game)
