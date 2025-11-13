@@ -1,27 +1,31 @@
+"""
+If Python and Arcade are installed, this example can be run from the command line with:
+python -m arcade.examples.music_control_demo
+"""
 import arcade
-import util.constants as constants
-from util.constants import WINDOW_HEIGHT, WINDOW_WIDTH
+import arcade.gui
+import arcade.gui.widgets.buttons
+import arcade.gui.widgets.layout
+from arcade.gui.widgets.slider import UISlider
 from arcade.gui import (
     UIManager,
     UITextureButton,
     UIAnchorLayout,
     UIView,
-    UIFlatButton,
-    UISlider
+    UIFlatButton
 )
 
-class MenuView(arcade.View):
-    """ Class that manages the 'menu' view. """
+
+class SettingsView(arcade.View):
     def __init__(self):
         super().__init__()
-        
-        self.manager = arcade.gui.UIManager()
-        self.manager.enable()
 
-        self.vol_slider = UISlider(value=0.5, width=600, height=150, max_value=1, min_value=0)
-        self.vol_slider.event(self.on_change)
+        # This creates a "manager" for all our UI elements
+        self.ui_manager = arcade.gui.UIManager(self.window)
 
-        # --- mute button
+        box = arcade.gui.widgets.layout.UIBoxLayout(vertical=True, space_between=20)
+
+        # --- Start button
         normal_texture = arcade.load_texture(
             ":resources:onscreen_controls/flat_dark/sound_off.png"
         )
@@ -33,34 +37,69 @@ class MenuView(arcade.View):
         )
 
         # Create our button
-        self.mute_button = arcade.gui.widgets.buttons.UITextureButton(
+        self.start_button = arcade.gui.widgets.buttons.UITextureButton(
             texture=normal_texture,
             texture_hovered=hover_texture,
             texture_pressed=press_texture,
         )
-
-        ui_anchor_layout = arcade.gui.UIAnchorLayout()
-        ui_anchor_layout.add(child=self.vol_slider, 
-                             anchor_x="center_x", 
-                             anchor_y="center_y", 
-                             align_y = 150)
         
-        ui_anchor_layout.add(child=self.mute_button, 
-                             anchor_x="center_x", 
-                             anchor_y="center_y", 
-                             align_y = -150)
 
-    def on_show_view(self):
-        """ Called when switching to this view"""
-        self.window.background_color = arcade.color.BLACK
-        self.ui.enable()
-    
-    def on_hide_view(self) -> None:
-        self.ui.disable()
+        self.vol_slider = UISlider(value=0.5, width=600, height=150, max_value=1, min_value=0)
+        # Add in our element.
+        box.add(self.start_button)
+        box.add(self.vol_slider)
+        return_button = box.add(
+            UIFlatButton(width=340,height=50,text="Return")
+        )
+
+        self.ui_manager.add(
+            arcade.gui.widgets.layout.UIAnchorLayout(children=[box])
+        )
+
+        @return_button.event("on_click")
+        def on_click(event):
+            print("DEBUG: moving to settings")
+            from views.main_menu import MenuView
+            self.window.show_view(MenuView())
 
     def on_draw(self):
-        """ Draw the menu """
         self.clear()
-       
-        self.ui.draw()
-       
+
+        # This draws our UI elements
+        self.ui_manager.draw()
+        arcade.draw_text("SETTINGS MENU",
+                         x=0, y=self.window.height - 55,
+                         width=self.window.width,
+                         font_size=40,
+                         align="center",
+                         color=arcade.color.GOLD)
+
+    def on_show_view(self):
+        self.window.background_color = arcade.color.BLACK
+
+        # Registers handlers for GUI button clicks, etc.
+        # We don't really use them in this example.
+        self.ui_manager.enable()
+
+    def on_hide_view(self):
+        # This unregisters the manager's UI handlers,
+        # Handlers respond to GUI button clicks, etc.
+        self.ui_manager.disable()
+
+def main():
+    """ Main function """
+    # Create a window class. This is what actually shows up on screen
+    window = arcade.Window()
+
+    # Create the GameView
+    game = SettingsView()
+
+    # Show GameView on screen
+    window.show_view(game)
+
+    # Start the arcade game loop
+    arcade.run()
+
+
+if __name__ == "__main__":
+    main()
