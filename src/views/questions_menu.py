@@ -1,6 +1,7 @@
 import arcade
 import util.constants as constants
 from util.constants import WINDOW_HEIGHT, WINDOW_WIDTH
+from util.audio import Audio
 from arcade.gui import (
     UIManager,
     UITextureButton,
@@ -10,10 +11,15 @@ from arcade.gui import (
 )
 
 
-class GuessView(arcade.View):
+class QuestionView(arcade.View):
     """ Class that manages the 'menu' view. """
     def __init__(self):
         super().__init__()
+
+        self.audio = Audio(
+            musicPath="src/music/Wii Sports OST_ Golf - Results.mp3",
+            musicVolume=1
+        )
 
         # Create a UIManager
         self.ui = UIManager()
@@ -30,10 +36,6 @@ class GuessView(arcade.View):
         self.buttons.scale = .6
         self.buttons.center_x = WINDOW_WIDTH /2
         self.buttons.center_y = WINDOW_HEIGHT /2 -150
-
-        self.bubble = arcade.Sprite(constants.bubble)
-        self.bubble.center_x = WINDOW_WIDTH /2
-        self.bubble.center_y = WINDOW_HEIGHT/2 + 120
 
         # Add a button switch to the other View.
         yes_button = anchor.add(
@@ -78,6 +80,7 @@ class GuessView(arcade.View):
         """ Called when switching to this view"""
         self.window.background_color = arcade.color.BLACK
         self.ui.enable()
+        self.audio.start_music(loop = True)
     
     def on_hide_view(self) -> None:
         self.ui.disable()
@@ -90,3 +93,7 @@ class GuessView(arcade.View):
         self.ui.draw()
         arcade.draw_text("Does it jiggle?", 3*WINDOW_WIDTH / 4, WINDOW_HEIGHT - 100,
                          arcade.color.GOLD, font_size=30, anchor_x="center")
+        
+    def on_close(self):
+        self.audio.stop_music()
+        super().on_close()
