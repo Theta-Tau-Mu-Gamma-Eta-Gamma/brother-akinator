@@ -9,6 +9,8 @@ from arcade.gui import (
     UIFlatButton
 )
 import random
+from views.questions_menu import QuestionView
+from views.settings_menu import SettingsView
 
 
 class MenuView(arcade.View):
@@ -53,12 +55,15 @@ class MenuView(arcade.View):
         @start_button.event("on_click")
         def on_click(event):
             print("DEBUG: moving to questions")
+            question_view = QuestionView()
+            self.window.show_view(question_view)
             #self.window.show_view(BlueView())
 
         @settings_button.event("on_click")
         def on_click(event):
             print("DEBUG: moving to settings")
-            #self.window.show_view(BlueView())
+            settings_view = SettingsView(self)
+            self.window.show_view(settings_view)
 
         @exit_button.event("on_click")
         def on_click(event):

@@ -9,15 +9,16 @@ from arcade.gui import (
     UIFlatButton
 )
 import random
-
+from views.settings_menu import SettingsView   
 
 class PauseView(arcade.View):
     """ Class that manages the 'pause' view. """
-    def __init__(self):
+    def __init__(self, game_view: arcade.View):
         super().__init__()
 
         # Create a UIManager
         self.ui = UIManager()
+        self.game_view = game_view
 
         # Create an anchor layout, which can be used to position widgets on screen
         anchor = self.ui.add(UIAnchorLayout())
@@ -59,11 +60,13 @@ class PauseView(arcade.View):
         def on_click(event):
             print("DEBUG: moving to questions")
             # self.window.show_view(BlueView())
+            self.window.show_view(self.game_view)
 
         @settings_button.event("on_click")
         def on_click(event):
             print("DEBUG: moving to settings")
-            #self.window.show_view(BlueView())
+            settings_view = SettingsView(self)
+            self.window.show_view(settings_view)
 
         @exit_button.event("on_click")
         def on_click(event):

@@ -9,6 +9,7 @@ from arcade.gui import (
     UIView,
     UIFlatButton
 )
+from views.pause_menu import PauseView
 
 
 class QuestionView(arcade.View):
@@ -20,6 +21,7 @@ class QuestionView(arcade.View):
             musicPath="src/music/Wii Sports OST_ Golf - Results.mp3",
             musicVolume=1
         )
+
 
         # Create a UIManager
         self.ui = UIManager()
@@ -94,6 +96,12 @@ class QuestionView(arcade.View):
         arcade.draw_text("Does it jiggle?", 3*WINDOW_WIDTH / 4, WINDOW_HEIGHT - 100,
                          arcade.color.GOLD, font_size=30, anchor_x="center")
         
+    def on_key_press(self, symbol:int, modifiers:int):
+            if symbol == arcade.key.ESCAPE:
+                print("ESC Pressed opening pause menu")
+                pause_view = PauseView(self)
+                self.window.show_view(pause_view)
+
     def on_close(self):
         self.audio.stop_music()
         super().on_close()
