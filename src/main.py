@@ -2,7 +2,7 @@ import arcade
 
 from util.constants import WINDOW_HEIGHT, WINDOW_TITLE, WINDOW_WIDTH
 from window import BrotherWindow 
-from views.main_menu import MenuView
+from views.guess_menu import GuessView
 
 def main():
     """ Main function """
@@ -10,7 +10,7 @@ def main():
     window = BrotherWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 
     # Create and setup the GameView
-    game = MenuView()
+    game = GuessView()
 
     # Show GameView on screen
     window.show_view(game)
