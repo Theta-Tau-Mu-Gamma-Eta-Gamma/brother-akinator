@@ -11,6 +11,8 @@ from arcade.gui import (
     UIFlatButton
 )
 
+import globals
+
 
 class SettingsView(arcade.View):
     def __init__(self, previous_view: arcade.View):
@@ -46,6 +48,7 @@ class SettingsView(arcade.View):
         
 
         self.vol_slider = UISlider(value=0.5, width=600, height=150, max_value=1, min_value=0)
+
         # Add in our element.
         box.add(self.start_button)
         box.add(self.vol_slider)
@@ -61,6 +64,11 @@ class SettingsView(arcade.View):
         def on_click(event):
             print("DEBUG: moving to settings")
             self.window.show_view(self.previous_view)
+
+        @self.vol_slider.event("on_change")
+        def on_volume_change(event):
+            print("DEBUG: changing volume")
+            globals.audio.set_music_volume(self.vol_slider.value)
 
     def on_draw(self):
         self.clear()

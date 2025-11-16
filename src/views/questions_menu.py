@@ -82,7 +82,6 @@ class QuestionView(arcade.View):
         """ Called when switching to this view"""
         self.window.background_color = arcade.color.BLACK
         self.ui.enable()
-        self.audio.start_music(loop = True)
     
     def on_hide_view(self) -> None:
         self.ui.disable()

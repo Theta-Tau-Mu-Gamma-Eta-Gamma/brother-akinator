@@ -33,7 +33,8 @@ class Audio:
             self._music_player = None
     
     def set_music_volume(self, volume: float):
-        self.sfxVolume = max(0.0,min(1.0,volume))
+        self._music_player.volume = volume
+        #self.sfxVolume = max(0.0,min(1.0,volume))
 
     def toggle_mute(self):
         self.muted = not self.muted
