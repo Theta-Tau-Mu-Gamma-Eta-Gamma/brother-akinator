@@ -7,8 +7,6 @@ class BrotherWindow(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
 
-        # uncomment this line when ready to use the model, 
-        # it creates a deepcopy so that when using the model for questions it doenst get messed up
         self.model, self.questions = mnb.get_model(r"src\util\dataset-v1.csv")
         
         #used to keep track of answers
@@ -17,11 +15,9 @@ class BrotherWindow(arcade.Window):
 
     def generate_guess(self):
         guess = self.model.predict_proba(self.user_answers)
-        guess = guess[0]
-
-        return guess
+        return guess[0]
     
-
+    #returns a question (string) and its index (int)
     def get_a_question(self):
         # find questions not yet asked
         remaining = [q for q in self.asked_questions if q not in self.questions]
@@ -31,5 +27,12 @@ class BrotherWindow(arcade.Window):
 
         # return one random element
         import random
-        return random.choice(remaining)
+        q = random.choice(remaining)
+        self.asked_questions.add(q)
+        i = np.where(self.questions == q)
+
+        return q, i
+    
+    def answered(self, idx, answer):
+        self.user_answers[idx] = answer
         
