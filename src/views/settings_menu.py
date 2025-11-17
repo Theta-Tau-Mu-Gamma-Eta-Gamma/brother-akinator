@@ -76,6 +76,8 @@ class SettingsView(arcade.View):
         self.window.background_color = constants.COLOR_BG
         self.ui.enable()
 
+        self.vol_slider.value = globals.audio.get_music_volume()
+
     def on_hide_view(self):
         self.ui.disable()
 

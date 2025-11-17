@@ -41,3 +41,5 @@ class Audio:
         if self._music_player:
             self._music_plater.volume = 0.0 if self.muted else self.set_music_volume
 
+    def get_music_volume(self) -> float:
+        return self._music_player.volume
