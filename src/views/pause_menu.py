@@ -9,20 +9,29 @@ from arcade.gui import (
     UIFlatButton
 )
 import random
-from views.questions_menu import QuestionView
-from views.settings_menu import SettingsView
+from views.settings_menu import SettingsView   
 
-
-class MenuView(arcade.View):
-    """ Class that manages the 'menu' view. """
-    def __init__(self):
+class PauseView(arcade.View):
+    """ Class that manages the 'pause' view. """
+    def __init__(self, game_view: arcade.View):
         super().__init__()
 
         # Create a UIManager
         self.ui = UIManager()
+        self.game_view = game_view
 
         # Create an anchor layout, which can be used to position widgets on screen
         anchor = self.ui.add(UIAnchorLayout())
+
+        self.shaqanator = arcade.Sprite(constants.shaqanator)
+        self.shaqanator.scale = 1
+        self.shaqanator.center_x = 3*WINDOW_WIDTH /4 + 160
+        self.shaqanator.center_y = WINDOW_HEIGHT /2
+
+        self.shaqanator2 = arcade.Sprite(constants.shaqanator)
+        self.shaqanator2.scale = 1
+        self.shaqanator2.center_x = WINDOW_WIDTH /4 - 160
+        self.shaqanator2.center_y = WINDOW_HEIGHT /2
 
         # Bg
         self.bg = arcade.Sprite(constants.background_pattern)
@@ -40,8 +49,8 @@ class MenuView(arcade.View):
         buttons_h = 80
         buttons_gap = 40
 
-        start_button = anchor.add(
-            UIFlatButton(width=buttons_w,height=buttons_h,text="Start",style=constants.button_style_big), 
+        resume_button = anchor.add(
+            UIFlatButton(width=buttons_w,height=buttons_h,text="Resume",style=constants.button_style_big), 
             align_y=-(buttons_h + buttons_gap) * 0,
             align_x=0
 
@@ -57,10 +66,10 @@ class MenuView(arcade.View):
             align_x=0
         )
 
-        @start_button.event("on_click")
+        @resume_button.event("on_click")
         def on_click(event):
-            question_view = QuestionView("Does it jiggle?", 1)
-            self.window.show_view(question_view)
+            # self.window.show_view(BlueView())
+            self.window.show_view(self.game_view)
 
         @settings_button.event("on_click")
         def on_click(event):
@@ -85,7 +94,9 @@ class MenuView(arcade.View):
         self.clear()
         arcade.draw_sprite(self.bg)
         arcade.draw_sprite(self.top_bar)
+        arcade.draw_sprite(self.shaqanator)
+        arcade.draw_sprite(self.shaqanator2)
         self.ui.draw()
-        arcade.draw_text("Brother Akinator", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 + 228, constants.COLOR_LIGHT, font_size=32, anchor_x="center", anchor_y="center")
+        arcade.draw_text("Pause", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 + 228, constants.COLOR_LIGHT, font_size=32, anchor_x="center", anchor_y="center")
 
    
