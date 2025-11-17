@@ -73,14 +73,8 @@ def get_model(csv_file):
                 questions = np.asarray(row[1:])
             else:
                 X.append([int(i) for i in row[1:]])
-
-
     x = np.asarray(X)
-    return MultinomialNB().fit(x,y)
-
-def guess(model:MultinomialNB, answers):
-    return model.predict_proba(answers)
-
+    return MultinomialNB().fit(x,y), questions
 
 if __name__ == "__main__":
     get_model(r"src\util\dataset-v1.csv")
