@@ -59,7 +59,7 @@ class MenuView(arcade.View):
 
         @start_button.event("on_click")
         def on_click(event):
-            question_view = QuestionView("Does it jiggle?", 1)
+            question_view = QuestionView()
             self.window.show_view(question_view)
 
         @settings_button.event("on_click")

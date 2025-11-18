@@ -26,6 +26,22 @@ background_pattern = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"backgro
 question_bar = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"question-bar.png")
 top_bar = arcade.load_texture(pathlib.Path(r"src")/"sprites"/"top-bar.png")
 
+textures = {
+    "Charlie Jiang": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Charlie Jiang.jpeg"),
+    "Daniela Duenas": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Daniela Duenas.jpeg"),
+    "Hayden Chester": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Hayden Chester.jpeg"),
+    "Jordan Wrench": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Jordan Wrench.png"),
+    "Lillian Mangan": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Lillian Mangan.jpeg"),
+    "Matthew Amato": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Matt Amato.jpeg"),
+    "Nick Reilly": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Nick Reilly.jpeg"),
+    "Bushra Khan": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Bushra Khan.jpeg"),
+    "Zakya El Abbadi": arcade.load_texture(pathlib.Path(r"src")/"sprites"/"Zakya El Abbadi.jpeg"),
+}
+
+
+
+
+
 # Game colors.
 COLOR_BG = (40, 40, 40)
 COLOR_GOLD = (255, 215, 0)
